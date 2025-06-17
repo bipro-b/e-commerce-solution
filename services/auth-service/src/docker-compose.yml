@@ -1,0 +1,34 @@
+version: "3.9"
+
+services:
+  mongo-auth:
+    image: mongo:6
+    container_name: mongo-auth-local
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_auth_data:/data/db
+    networks:
+      - auth-net
+
+  auth-service:
+    build: .
+    container_name: auth-service-local
+    ports:
+      - "5000:5000"
+    environment:
+      - PORT=5000
+      - MONGO_URI=mongodb://mongo-auth:27017/auth-db
+      - JWT_SECRET=supersecretkey
+      - JWT_EXPIRES_IN=1d
+    depends_on:
+      - mongo-auth
+    networks:
+      - auth-net
+
+volumes:
+  mongo_auth_data:
+
+networks:
+  auth-net:
+    driver: bridge
