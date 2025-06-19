@@ -6,7 +6,7 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 
-app.use('/api/auth', authRoutes);
+app.use('/auth', authRoutes);
 
 app.get('/', (req, res) => res.send('Auth Service is running'));
 

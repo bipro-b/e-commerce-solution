@@ -1,0 +1,22 @@
+  # 🌐 Gateway API
+  gateway-api:
+    container_name: gateway-api
+    build: ./services/gateway-api
+    ports:
+      - "8000:8000"
+    environment:
+      - PORT=8000
+      - AUTH_SERVICE_URL=http://auth-service:5000
+      - PRODUCT_SERVICE_URL=http://product-service:5002
+    depends_on:
+      - auth-service
+      - product-service
+    networks:
+      - backend
+
+volumes:
+  mongo_data:
+
+networks:
+  backend:
+    driver: bridge

@@ -6,7 +6,7 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 
-app.use('/api/products', productRoutes);
+app.use('/products', productRoutes);
 app.get('/', (_req, res) => res.send('Product Service Running'));
 
 export default app;

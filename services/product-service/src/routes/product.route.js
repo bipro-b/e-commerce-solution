@@ -7,6 +7,9 @@ const router = express.Router();
 
 router.use(authenticate);
 
+router.get('/ping', (_req, res) => res.send('Ping from Product Service'));
+
+
 router.post('/', authorize('seller'), controller.create);
 router.get('/', controller.list);
 router.get('/seller', authorize('seller'), controller.sellerProducts);

@@ -1,0 +1,27 @@
+ 
+ version: "3.9"
+
+services:
+  # 🔐 MongoDB (shared)
+  mongo:
+    image: mongo:6
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - backend
+ # 📦 Product Service
+  product-service:
+    container_name: product-service
+    build: ./services/product-service
+    ports:
+      - "5002:5002"
+    environment:
+      - PORT=5002
+      - MONGO_URI=mongodb+srv://admin:bipro@cluster0.vdort1t.mongodb.net/product-service?retryWrites=true&w=majority&appName=Cluster0
+    depends_on:
+      - mongo
+    networks:
+      - backend
