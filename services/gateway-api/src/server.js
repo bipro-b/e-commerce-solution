@@ -10,16 +10,19 @@ const PORT = 8000;
 app.use('/api/auth-service', createProxyMiddleware({
   target: 'http://localhost:5000',
   changeOrigin: true,
-  // pathRewrite: { '^/auth': '' },
+
 }));
 
 // Proxy to /products → http://localhost:5002/
 app.use('/api/product-service', createProxyMiddleware({
   target: 'http://localhost:5002',
   changeOrigin: true,
-  // pathRewrite: { '^/products': '' }, 
 }));
 
+app.use('/api/seller-service', createProxyMiddleware({
+  target: 'http://localhost:5006',
+  changeOrigin: true,
+}));
 // Proxy to /users → http://localhost:3003/
 app.use('/users', createProxyMiddleware({
   target: 'http://localhost:3003',
