@@ -23,12 +23,12 @@ app.use('/api/seller-service', createProxyMiddleware({
   target: 'http://localhost:5006',
   changeOrigin: true,
 }));
-// Proxy to /users → http://localhost:3003/
-app.use('/users', createProxyMiddleware({
-  target: 'http://localhost:3003',
+
+app.use('/api/order-service', createProxyMiddleware({
+  target: 'http://localhost:5003',
   changeOrigin: true,
-  // pathRewrite: { '^/users': '' },
 }));
+
 
 app.listen(PORT, () => {
   console.log(`API Gateway running on port ${PORT}`);
