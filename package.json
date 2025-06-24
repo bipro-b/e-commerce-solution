@@ -4,7 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "service1": "cd services/seller-service && npm run dev",
+    "service2": "cd services/product-service && npm run dev",
+    "service3": "cd services/auth-service && npm run dev",
+    "service4": "cd services/order-service && npm run dev",
+    "service5": "cd services/payment-service && npm run dev",
+    "service6": "cd services/gateway-api && npm run dev",
+    "start:all": "npm-run-all --parallel service1 service2 service3 service4 service5 service6"
+
   },
   "repository": {
     "type": "git",
